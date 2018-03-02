@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray} from '@angular/forms';
+
 
 @Component({
   selector: 'stock-products',
@@ -19,7 +20,7 @@ import { FormGroup, FormArray} from '@angular/forms';
             min = "10"
             max = "1000"
             formControlName = "quantity">
-            <button type="Button">
+            <button type="Button" (click)="onRemove(item,i)">
              Remove
             </button>
           </div>
@@ -31,6 +32,13 @@ import { FormGroup, FormArray} from '@angular/forms';
 export class StockProductsComponent {
   @Input()
   parent: FormGroup;
+  
+  @Output()
+  removed = new EventEmitter<any>();
+  
+  onRemove(group,index){
+   this.removed.emit({group,index});
+  }
 
   get stocks(){
     return (this.parent.get('stock') as FormArray).controls;
