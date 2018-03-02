@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 
 import { Product } from '../../models/product.interface';
+import { createDeflateRaw } from 'zlib';
 
 @Component({
   selector: 'stock-inventory',
@@ -53,13 +54,21 @@ export class StockInventoryComponent {
       code: new FormControl('')
     }),
 
-    selector: new FormGroup({
-      product_id: new FormControl(''),
-      quantity: new FormControl(10)
-    }),
+    selector:this.createStock({}),
     
-    stock: new FormArray([])
+    stock: new FormArray([
+     this.createStock({product_id:1,quantity:10}),
+     this.createStock({product_id:3,quantity:50}),
+    ])
   })
+
+  createStock(stock){
+    return  new FormGroup({
+      product_id: new FormControl(stock.product_id || ''),
+      quantity: new FormControl(stock.quantity || 10)
+    });
+  }
+
 
   onSubmit() {
     console.log('Submit:', this.form.value);
