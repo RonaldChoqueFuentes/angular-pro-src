@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 import { Product } from '../../models/product.interface';
 import { createDeflateRaw } from 'zlib';
@@ -50,24 +50,26 @@ export class StockInventoryComponent {
     { "id": 5, "price": 600, "name": "Apple Watch" },
   ];
 
-  form = new FormGroup({
-    store: new FormGroup({
-      branch: new FormControl(''),
-      code: new FormControl('')
+  form = this.fb.group({
+    store: this.fb.group({
+      branch: '',
+      code: ''
     }),
 
     selector:this.createStock({}),
     
-    stock: new FormArray([
+    stock: this.fb.array([
      this.createStock({product_id:1,quantity:10}),
      this.createStock({product_id:3,quantity:50}),
     ])
   })
 
+  constructor(private fb:FormBuilder){}
+
   createStock(stock){
-    return  new FormGroup({
-      product_id: new FormControl(parseInt(stock.product_id, 10) || ''),
-      quantity: new FormControl(stock.quantity || 10)
+    return this.fb.group({
+      product_id: parseInt(stock.product_id, 10) || '',
+      quantity: stock.quantity || 10
     });
   }
 
