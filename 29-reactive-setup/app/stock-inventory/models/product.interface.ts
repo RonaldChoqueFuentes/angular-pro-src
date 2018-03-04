@@ -6,5 +6,5 @@ export interface Product {
 
   export interface Item{
     product_id:number,
-    quantiry:number
+    quantity:number
   }
