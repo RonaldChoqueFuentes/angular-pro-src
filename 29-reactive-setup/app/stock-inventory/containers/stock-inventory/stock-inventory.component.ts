@@ -92,7 +92,7 @@ export class StockInventoryComponent implements OnInit{
        
        this.form.get('stock')
        .valueChanges.subscribe(
-         value=>{
+         value =>{
            this.calculateTotal(value);
         });
     });

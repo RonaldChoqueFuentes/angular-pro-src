@@ -38,6 +38,21 @@ export class StockSelectorComponent {
 
   onAdd(){
     this.added.emit(this.parent.get('selector').value);
+    
+    this.parent.get('selector').setValue({
+      product_id:'',
+      quantity:10
+    });
+    
+    /*
+    this.parent.get('selector').patchValue({
+      product_id:''
+    });*/
+    /*
+    this.parent.get('selector').reset({
+      product_id:'',
+      quantity:10
+    });*/
 
   }
 
