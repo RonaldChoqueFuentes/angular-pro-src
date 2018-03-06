@@ -5,8 +5,10 @@ import { Product, Item } from '../../models/product.interface';
 
 
 import {Observable} from 'rxjs/Observable';
+import {StockValidators} from './stock-inventory.validators';
 
 import 'rxjs/add/Observable/forkJoin'
+
 
 import {StockInventoryService} from '../../services/stock-inventory.service';
 
@@ -58,7 +60,7 @@ export class StockInventoryComponent implements OnInit{
 
   form = this.fb.group({
     store: this.fb.group({
-      branch: ['', Validators.required],
+      branch: ['', [Validators.required, StockValidators.checkBranch]],
       code: ['', Validators.required],
     }),
 
