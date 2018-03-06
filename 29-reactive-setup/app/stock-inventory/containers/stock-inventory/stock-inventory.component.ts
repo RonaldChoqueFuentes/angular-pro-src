@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
 
 import { Product, Item } from '../../models/product.interface';
 
@@ -60,7 +60,7 @@ export class StockInventoryComponent implements OnInit{
 
   form = this.fb.group({
     store: this.fb.group({
-      branch: ['', [Validators.required, StockValidators.checkBranch]],
+      branch: ['', [Validators.required, StockValidators.checkBranch],[this.validateBranch.bind(this)]],
       code: ['', Validators.required],
     }),
 
@@ -100,6 +100,13 @@ export class StockInventoryComponent implements OnInit{
     });
   }
   
+  validateBranch(control:AbstractControl){
+   return this.stockservice.checkBranchId(control.value)
+          .map((response:boolean)=>{
+            return response ? null : {unknownBranch:true};
+          })
+  }
+
   calculateTotal(value:Item[]){
     const total = value.reduce((prev, next)=>{
       return prev + next.quantity * this.productMap.get(next.product_id).price;
