@@ -68,7 +68,7 @@ export class StockInventoryComponent implements OnInit{
     
     stock: this.fb.array([])
 
-  })
+  },{validator:StockValidators.checkStockExist})
 
   constructor(
     private fb:FormBuilder,
