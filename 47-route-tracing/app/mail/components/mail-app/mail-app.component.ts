@@ -5,8 +5,19 @@ import { Component } from '@angular/core';
   styleUrls: ['mail-app.component.scss'],
   template: `
     <div class="mail">
-      <router-outlet></router-outlet>
+      <router-outlet
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)" ></router-outlet>
     </div>
   `
 })
-export class MailAppComponent {}
+export class MailAppComponent {
+
+  onActivate(event){
+   console.log('activate', event);
+  }
+
+  onDeactivate(event){
+    console.log('deactivate', event);
+  }
+}
