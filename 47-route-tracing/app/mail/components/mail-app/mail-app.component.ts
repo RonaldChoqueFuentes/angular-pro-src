@@ -5,9 +5,10 @@ import { Component } from '@angular/core';
   styleUrls: ['mail-app.component.scss'],
   template: `
     <div class="mail">
-      <router-outlet
-      (activate)="onActivate($event)"
-      (deactivate)="onDeactivate($event)" ></router-outlet>
+      <router-outlet></router-outlet>
+    </div>
+    <div class="mail">
+      <router-outlet name="pane"></router-outlet>
     </div>
   `
 })
