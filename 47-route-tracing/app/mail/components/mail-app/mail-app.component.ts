@@ -5,6 +5,9 @@ import { Component } from '@angular/core';
   styleUrls: ['mail-app.component.scss'],
   template: `
     <div class="mail">
+    <h1>
+    Activated Parent!
+    </h1>
       <router-outlet></router-outlet>
     </div>
     <div class="mail">
