@@ -55,19 +55,18 @@ describe('StockCounterComponent', () => {
   });
 
   it('should not increment over the maximum value', () => {
-     component.step = 20;
-     component.max = 20;
-     component.increment();
-     component.increment();
-     expect(component.value).toBe(20);
-
+    component.step = 20;
+    component.max = 20;
+    component.increment();
+    component.increment();
+    expect(component.value).toBe(20);
   });
 
-  it('should call the output on a value change',()=>{
-      spyOn(component.changed,'emit').and.callThrough();
-      component.step = 100;
-      component.increment();
-      expect(component.changed.emit).toHaveBeenCalledWith(100);
+  it('should call the output on a value change', () => {
+    spyOn(component.changed, 'emit').and.callThrough();
+    component.step = 100;
+    component.increment();
+    expect(component.changed.emit).toHaveBeenCalledWith(100);
   });
 
 });

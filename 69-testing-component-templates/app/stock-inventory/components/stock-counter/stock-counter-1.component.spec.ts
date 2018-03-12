@@ -37,12 +37,9 @@ describe('StockCounterComponent', () => {
   });
 
   it('should increment the value when the up arrow is pressed', () => {
-    
     const event = new Event('KeyboardEvent') as any;
     event.code = 'ArrowUp';
-
     el.query(By.css('.stock-counter > div > div')).triggerEventHandler('keydown', event);
-    
     fixture.detectChanges();
     expect(component.value).toBe(1);
   });
