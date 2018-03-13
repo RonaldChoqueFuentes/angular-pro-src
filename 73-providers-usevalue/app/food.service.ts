@@ -10,7 +10,9 @@ export class FoodService {
   constructor(
     private http: Http,
     @Inject(API_TOKEN) private api: string
-  ) {}
+  ) {
+    console.log('ultimate angular');
+  }
   getFood(): Observable<any[]> {
     return this.http.get(this.api)
       .map(response => response.json());
