@@ -10,10 +10,20 @@ interface Side {
   price: number
 }
 
+export function SideFactory(http) {
+  return new FoodService(http, '/api/sides');
+}
+
 @Component({
   selector: 'side-viewer',
   providers: [
-    FoodService
+    {
+      provide: FoodService,
+      useFactory: SideFactory,
+      deps: [
+        Http
+      ]
+    }
   ],
   template: `
     <div>
