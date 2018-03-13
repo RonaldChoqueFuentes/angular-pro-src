@@ -14,6 +14,15 @@ export function SideFactory(http) {
   return new FoodService(http, '/api/sides');
 }
 
+interface Drink{
+  name:string,
+  price:number
+}
+//to encapsulate some methods to no be used
+export abstract class DrinkService{
+ getDrinks:()=>Observable<Drink[]>
+}
+
 @Component({
   selector: 'side-viewer',
   providers: [
@@ -23,7 +32,8 @@ export function SideFactory(http) {
       deps: [
         Http
       ]
-    }
+    }//,{ provide:DrinkService,useClass:FoodService }
+    
   ],
   template: `
     <div>
