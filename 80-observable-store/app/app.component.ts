@@ -7,7 +7,7 @@ import { Store } from './store';
   template: `
     <div>
       <div *ngFor="let todo of todos$ | async">
-        {{ todo.name }}
+         {{ todo.name }}
       </div>
     </div>
   `
