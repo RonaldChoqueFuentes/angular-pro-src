@@ -1,38 +1,37 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '../../../store';
-import { SongsService } from '../../services/songs.service'
+import { Component, OnInit } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
+import { SongsService } from '../../services/songs.service';
+
+import { Store } from '../../../store';
+
 @Component({
-    selector:'songs-favourites',
-    template:`
+  selector: 'songs-favourites',
+  template: `
     <div class="songs">
-    <div *ngFor="let item of favourites$ | async">
-    {{ item.artist }}
-    {{ item.track }}
+      <songs-list
+        [list]="favourites$ | async">
+        Favourites
+      </songs-list>
     </div>
-  </div>
-    `
+  `
 })
+export class SongsFavouritesComponent implements OnInit {
 
-export class SongsFavouritesComponent implements OnInit, OnDestroy{
-    
-    favourites$: Observable<any[]>;
-    
+  favourites$: Observable<any[]>;
 
-    constructor(private store:Store,
-                private songsService:SongsService){}
-    
-    ngOnInit(){
-        this.favourites$ = this.store.select('playlist')
-        .filter(Boolean)
-        .map(playlist => playlist.filter(track => track.favourite));   
-    }
+  constructor(
+    private store: Store,
+    private songsService: SongsService
+  ) {}
 
-    ngOnDestroy(){
-        
-    }
+  ngOnInit() {
+    this.favourites$ = this.store.select('playlist')
+      .filter(Boolean)
+      .map(playlist => playlist.filter(track => track.favourite));
+  }
+
 }
